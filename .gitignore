@@ -1,0 +1,7 @@
+\#*
+.DS_Store
+*.elc
+*.pyc
+/*.zip
+*.db
+
