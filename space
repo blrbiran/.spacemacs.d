@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ x"${ORIGIN_HOME}" = x"" ]; then
+    export ORIGIN_HOME=${HOME}
+fi
+export HOME="${ORIGIN_HOME}/spacemacs"
+
+emacs $@ &
