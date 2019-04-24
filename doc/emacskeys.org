@@ -1,0 +1,886 @@
+#+TITLE: Emacs
+#+AUTHOR: <Brian>
+#+EMAIL: <blrbiran@yeah.net>
+#+DATE: <2016-12-02 13:05:15>
+#+TODO: WAITING(w) DOING(d) TODO(T!) | DONE(D!) CANCELED(C@/!)
+#+OPTIONS: ^:nil
+
+#+LaTeX_HEADER: \usepackage{xeCJK}
+#+LaTeX_HEADER: \setCJKmainfont{SimSun}
+;帮助文字自动进入Outline Mode，可以用C-c C-a命令来展开所有分类，用C-c C-t命令来收起所有分类（只显示标题），光标在某一个分类上时，可以用C-c C-e命令来查看本分类内容。详细命令可参考后面附文中的Outline Mode部分。（~/emacskeys.txt文件内容附在本文最后）
+;Org-Mode 只需要使用 Tab键即可打开目录
+
+
+* 移动快捷键
+C-b ：左移一个字符
+C-f ：右移一个字符
+C-n ：下移一行
+C-p ：上移一行
+
+M-b ：左移一个单词
+M-f ：右移一个单词
+
+C-v ：下移一屏幕
+M-v ：上移一屏幕
+C-l ：刷新屏幕并将光标所在行移到屏幕中央
+C-u 0 C-l ：刷新屏幕并将光标所在行移动到屏幕上端
+
+C-a ：移动到本行开始位置
+C-e ：移动到本行结束位置
+
+M-a ：移动到本句开始位置
+M-e ：移动到本句结束位置
+
+M-{ ：移动到前一自然段
+M-} ：移动到后一自然段
+
+M-< ：移动到文章开头
+M-> ：移动到文章结尾
+
+M-x goto-line ：移动到某一行
+
+* 其他编辑
+M-t ：单词后移
+C-t ：字符后移
+C-x C-t ：行下移
+
+C-x C-u ：区域转大写
+C-x C-l ：区域转小写
+M-u ：光标至单词结尾转大写
+M-l ：光标至单词结尾转小写
+M-c ：首字大写
+
+* 其他基本键
+C-j ：带缩进回车
+M-x ：执行函数
+C-u ：指定函数参数
+C-g ：中断命令
+C-x u ：undo
+C-/ ：undo
+C-_ ：undo
+C-x C-0 ：字体复原
+C-x C-- ：字体缩小
+C-x C-= ：字体增大
+
+C-x C-z：暂停emacs应用
+C-x C-c：关闭emacs应用
+
+* 插入删除
+<Delback> ：删除光标左边字符
+C-d ：删除光标右边字符
+M-z ：删除到指定字符
+
+M-<Delback> ：删除光标左边单词
+M-d ：删除光标右边单词
+
+c-k ：从光标处删除至行尾
+M-k ：从光标处删除至句尾
+
+C-S-<Delback> ：删除本行
+
+* 区域操作
+M-@ ：标记区域起点
+M-h ：标记一自然段
+C-w ：删除区域
+M-y ：将上一次yank所插入的内容改为yank缓冲区中更早的记录内容
+C-x C-x ：将当前光标与标记位置交换
+M-w ：缓存区域（以便后续yank）
+C-x h ：全选当前buffer
+
+* 查找与替换
+C-s ：正向增量查找
+C-r ：反向增量查找
+M-% ：替换（带询问）
+C-M-s Enter ：正向正则表达式搜索
+C-M-r Enter ：反向正则表达式搜索
+C-M-箭头 ：继续正则表达式搜索
+C-M-s ：正向正则增量搜索
+C-M-r ：反向正则增量搜索
+C-M-% ：正则表达式替换（带询问）
+
+M-s h l ：高亮显示匹配指定正则表达式的行
+M-s h r ：高亮显示匹配指定正则表达式的文本
+M-s h u ：取消指定正则表达式的高亮
+
+* Buffer操作
+C-x 1 ：当前buffer最大化，关闭其他窗口
+C-x C-b ：列出所有缓冲区
+C-x b ：打开指定缓冲区
+C-x s ：保存所有缓冲区
+C-x C-<Left> ：前一缓冲区
+C-x C-<Right> ：下一缓冲区
+M-x revert-buffer ：恢复当前缓冲区内容（放弃上一次保存之后的修改）
+C-x k ：删除指定缓冲区
+
+* 文件操作
+C-x C-f ：查找并打开文件
+C-x C-s ：保存文件
+
+* 窗口操作
+C-x 2 ：横向分割当前窗口
+C-x 3 ：纵向分割当前窗口
+C-x o ：移动到另一个窗口
+C-x 0 ：关闭当前窗口
+C-x + ：平均窗口大小
+C-M-v ：另一窗口下卷一屏幕
+C-x 4 f ：在另一窗口查找并打开文件
+C-x 4 b ：在另一窗口中打开一个buffer
+<ESC> <ESC> <ESC> ：退出窗口(当Frame中窗口大于一个时）
+
+* Fill Mode
+C-x f ：设置每行字符数
+M-q ：对本自然段重新排版
+
+M-o M-s ：本行居中
+M-o M-S ：自然段居中
+
+* 帮助
+C-h m ：当前major mode的说明
+C-h b ：键盘命令绑定列表
+C-h k ：键盘命令帮助
+C-h c ：键盘命令简明帮助
+C-h f ：函数帮助
+C-h a ：函数查找
+C-h i ：阅读手册
+
+* Outline Mode
+C-c C-b ：前一同级章节
+C-c C-f ：后一同级章节
+
+C-c C-p ：前一章节
+C-c C-n ：后一章节
+
+C-c C-u ：上一级章节
+
+C-c C-t ：令所有除标题外的文字不可见
+C-c C-a ：显示所有文字
+C-c C-q ：令前N级的文字可见
+
+C-c C-d ：隐藏当前章节的文字和子章节
+C-c C-s ：显示当前章节的文字和子章节
+C-c TAB ：显示当前章节的直接子章节标题
+C-c C-c ：隐藏当前章节的文本
+C-c C-e ：显示光标所在位置内容
+C-c C-l ：隐藏光标所在章节的文本和子章节的文本
+C-c C-k ：显示所有子章节的标题
+
+* Org-Mode
+   - State "DONE"       from ""           [2016-12-21 Wed 10:04]
+参考：
+1. [[http://www.fuzihao.org/blog/2015/02/19/org-mode%E6%95%99%E7%A8%8B/][org-mode入门教程]]
+2. [[http://orgmode.org/orgguide.pdf][org-mode官方教程]]
+
+** Chapter
+Org-Mode用* 标识章节，一个* 代表一级标题，两个* 代表两级标题，以此类推
+(*后面有空格)。
+
+S+Tab 展开、折叠所有章节
+Tab 对光标所在章节进行展开、折叠
+M+left/right 升级/降级标题
+M+S+left/right 升级/降级树
+
+** Title
+Org基于标题的文档编辑方式允许用户在非常简洁的显示模式下对某个或多个标题下的所有内容进行复制、粘贴、移动等操作，相当方便，真正实现了标题在文档管理中的组织者作用。
+*** 术语约定
+标题：仅指标题定义行
+子标题：大标题下属的小标题
+标题树：包括标题、子标题及其下属的所有文本
+大纲：或文档轮廓，即全部标题，是一种显示模式
+大纲折叠：隐藏子标题树
+大纲展开：分级显示子标题树
+*** 在标题间移动光标
+| 快捷键    | 动作                        |
+| C-c C-p/n | 移动到上/下一个标题         |
+| C-c C-b/f | 移动到同级别的上/下一个标题 |
+| C-c C-u   | 跳到上一级标题              |
+| C-c C-j   | 切换到大纲预览状态          |
+*** 大纲的折叠与展开
+手动操作：
+| 快捷键 | 动作                                                |
+| TAB    | 局部命令，循环使用可以折叠/展开光标所在位置的标题树 |
+| S+TAB  | 全局命令，循环使用可以折叠/展开整个文档的标题树     |
+设定文档属性：
+#+BEGIN_EXAMPLE
+#+STARTUP: overview
+#+STARTUP: content
+#+STARTUP: showall
+#+STARTUP: showeverything
+#+END_EXAMPLE
+*** 标题编辑
+| 快捷键         | 动作                                               |
+| M-LEFT/RIGHT   | 升级/降级当前标题，不允许有子标题的存在            |
+| M-S-LEFT/RIGHT | 升级/降级标题树，即标题树内的各级标题相应升/降级   |
+| M-UP/DOWN      | 在同级标题间上/下移标题树，不能跨级别移动          |
+| M-S-UP/DOWN    | 上/下移子树                                        |
+| M-RET          | 在当前标题后插入同级标题符号（即换行符和星号）     |
+| C-RET          | 在当前标题树后插入同级标题符号                     |
+| M-S-RET        | 在当前标题后插入同级TODO标题                       |
+| C-S-RET        | 在当前标题树后插入同级TODO标题                     |
+| C-c *          | 把光标所在行转成标题                               |
+| C-c -          | 把光标所在行转成列表                               |
+| C-c C-w        | 将子树或者区域移动到另一个标题处（跨缓冲区）       |
+| C-c C-x b      | 在新缓冲区显示当前分支                             |
+| C-c /          | 只列出包含搜索结果的大纲，并高亮，支持多种搜索方式 |
+*** 使用Tips
+Org-mode很多编辑命令的使用与光标所处的位置有关，同一个键盘命令如果光标位于不同文本环境可能会有不同的作用，这些命令称为局部命令。例如 C-c * 命令，如果光标位于普通文本或列表项内，它的作用是将该行转成上一级标题的子标题；如果该行已经是标题，则将其变为普通文本；如果在选区内执行该命令，把选区内所有行转成标题；如果选区内第一行是列表，仅把第一行转成标题；如果选区内第一行是标题，则把选区内所有标题行都转成普通文本。
+
+** List
+列表是文本中一个比较常用的元素，可以列出各种待完成的事项等。Org-Mode提
+供了一种很独特的功能，可以加入Checkbok（实际就是加入一对中间有空格的方
+括号[ ]）标记任务的完成状况，而且如果一个总任务有多个子任务，还可以根
+据子任务的完成情况计算总进度（只需要在总任务后面添加一对方括号，里面加
+上%或/ 如[%],[/]）。列表分为有序和无序两种，有序列表以1.或 1)开头，无
+序列表以+或-开头 后面，同样，后面要跟一个空格。
+
+使用 C-c C-c 对表中项目进行完成与未完成标注，输入一个无序列表：
+
++ [-] treeroot [1/2]
+  + [-] branch1
+  + [X] branch2
+
+在输入的时候，我们按M-RET（Alt+回车）可以自动输入同级的条目，按
+M+left/right调整层级。同理，我们还可以输入一个有序列表：
+
+1) [-] mission [50%]
+   1) [-] sub1
+   2) [X] sub2
+
+按 M-S-RET 可以输入一个带Checkbox的列表项，而在总任务后面可以输入一
+个[%]或者[/]则能自动计算总任务进度。
+
+常用快捷键：
+M-RET 插入同级列表项
+M-S-RET 插入有 checkbox的同级列表项
+C-c C-c 改变 checkbox状态
+M-left/right 改变列表项层级关系
+M-up/dowm 上下移动列表项
+
+** Footnote
+Details see: [[http://orgmode.org/manual/Footnotes.html]]
+
+用[fn:name1]的方式插入脚注，而在最下面插入　
+
+[fn:name1]本文参考自http://orgmode.org/orgguide.pdf
+这个标签是可以点击的。
+
+可以使用 C-c C-c 跳转与脚注和引用之间。
+
+** Table
+*** generate
+**** 编辑整体区域
+| C-c 竖线 | 创建或者转化成表格             |
+| C-c C-c  | 调整表格，不移动光标           |
+| TAB      | 移动到下一区域，必要时新建一行 |
+| S-TAB    | 移动到上一区域                 |
+| RET      | 移动到下一行，必要时新建一行   |
+
+C-c |    (org-table-create-or-convert-from-region)
+C-c -    (org-table-insert-hline)
+
+**** 编辑行和列
+| M-LEFT/RIGHT   | 移动列                           |
+| M-UP/DOWN      | 移动行                           |
+| M-S-LEFT/RIGHT | 删除/插入列                      |
+| M-S-UP/DOWN    | 删除/插入行                      |
+| C-c -          | 添加水平分割线                   |
+| C-c RET        | 添加水平分割线并跳到下一行       |
+| C-c ^          | 根据当前列排序，可以选择排序方式 |
+
+*** calculate
+C-Num C-c =     计算Num行 公式中$1代表第一列，以此类推。
+光标在TBLFM行中 C-c C-c  即可应用公式到所有行或所有列。
+@Num表示Num行，$Num表示Num列。
+公式与公式之间用 :: 隔开（#+TBLFM:$6=vsum($2..$5)::@5$2=vsum(@2..@4)）
+我们在第五列任选一个位置，输入=$3+$4，然后按C-u C-c C-c ，Org-Mode便能
+自动为我们计算所有三列加四列的和，并放到第五列。
+
+可用公式:
+| vcount（范围）  | 数据的数目             |
+| vsum（范围）    | 数据的总和             |
+| vprod（范围）   | 数据的总体积           |
+| vmax（范围）    | 数据的最大值           |
+| vmin（范围）    | 数据的最小值           |
+| vmean（范围）   | 数据（算术）平均       |
+| vgmean（范围）  | 数据的几何平均         |
+| vhmean（范围）  | 数据的调和平均值       |
+| vsdev（范围）   | 数据的标准差（N-1）的  |
+| vpsdev（范围）  | 数据的标准偏差（N）的  |
+| vvar（范围）    | 数据分布               |
+| vmedian（范围） | 中位数的数据（中间值） |
+
+*** cell operate
+删除cell文本
+C-c SPC
+
+跳到开头或者结尾
+M-a 和 M-e 
+
+将上一行Cell的文本复制到下一行
+S-Enter 可以将上一行cell的数据复制到当前空白的cell中, 如果是数字自动增加1。 光标可以在上一行的cell,也可以在下一行空白cell中，都一样。
+注意,如果文本中有小数点就不行了,因此IP地址是不能这样复制的。
+
+*** By converting a region into a table
+Org provides useful ways of converting a region into a table. For this, select a region and press C-c |. For example, press C-c | on this:
+some, comma, separated, values
+
+will automagically produce this:
+| some | comma | separated | values |
+
+Usually, this command should be smart enough to guess what is the field separator for the region. If each line of the active region contains a TAB or a comma, it will assume this is the separator.
+
+If you want to force the comma as a field separator, press C-u C-c |.
+If you want to force TAB as a field separator, press C-u C-u C-c |.
+If you want to force a specific number of spaces – say 3 – use C-u 3 C-c |.
+
+*** narrowing the visible part of a column
+Sometimes cells can get really wide. If you want to restrict the width visible width of a cell, you need to add a new row to your table.
+| <10>             | <15>                        |
+| A very wide cell | Another very very wide cell |
+
+Pressing C-c C-c on this table will update the display so that the first and second columns are respectively narrowed to 10 and 15 characters:
+| <10>     | <15>            |
+| A very=> | Another very => |
+
+When columns are narrowed, it might be useful to temporarily see the content of a cell with C-u <TAB> (or C-u C-c `) or to edit the content in a separate window with C-c `.
+
+*** Grouping columns
+You can group columns like this:
+|   |  N | N^2 | N^3 | N^4 | sqrt(n) | sqrt[4](N) |
+|---+----+-----+-----+-----+---------+------------|
+| / | <> |   < |     |   > |       < |          > |
+| # |  1 |   1 |   1 |   1 |       1 |          1 |
+| # |  2 |   4 |   8 |  16 |  1.4142 |     1.1892 |
+| # |  3 |   9 |  27 |  81 |  1.7321 |     1.3161 |
+|---+----+-----+-----+-----+---------+------------|
+
+** Link
+链接用于链接一些资源地址，如图片、文件、URL等。
+链接的格式是：
+#+BEGIN_EXAMPLE emacs
+[[链接地址][链接内容]]
+
+如：
+[[http://orgmode.org/orgguide.pdf][grgguid.pdf]]]
+[[file:/home/maple/图片/test.jpg][a picture]]
+
+如果去掉标签，则能直接显示图片：
+[[file:/home/maple/图片/test.jpg]]
+#+END_EXAMPLE
+
+直接显示的图片在Emacs里默认不显示，需按C-c C-x C-v才能显示，在输出成其
+他格式（html、pdf……）后也能看到。
+　　
+常用快捷键：
+C-c C-x C-v 直接预览图片。
+
+** Todo-list
+在文档任意地方加入以下内容
+#+TODO:WAITING(w) DOING(d) TODO(T!) | DONE(D!) CANCELED(C@/!)
+并按 C-c C-c应用新标签，以此扩充Todo list的标签种类
+
+其他内容类似 List 部分
+
+一些常用操作如下：
+C-c C-t 变换TODO的状态
+C-c / t以树的形式展示所有的 TODO
+C-c C-c 改变Checkbox状态
+S-< / S-> 设置优先级（方括号里的ABC）
+M-S-RET 插入同级TODO标签
+
+** Tags
+在org-mode中，可以给每一章节添加一个标签，我们可以通过树的结构来查看所
+有带标签的章节。在每一节中，子标题的标签会继承父标题标签。
+
+#+BEGIN_EXAMPLE text
+输入：
+\*** 章标题 	:work:learn:
+\**** 节标题1   :fly:plane:
+\**** 节标题2 	:car:run:
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE text
+同时可在org文件的开始处写下标签，如：
+#+TAGS: { ACADEMIC(a) ENGLISH(e) SCHOOL(s) LEARNING(l) OUTPUT(p) OTHER(o) }
+#+END_EXAMPLE
+
+一些常用命令如下：
+C-c C-q 为标题添加标签
+C-c / m 生成带标签的树
+
+** Date & Time
+输入C-c . 会出现一个日历，我们点选相应的时间即可插入时间标签
+
+时间前可以加DEADLINE:和SCHEDULED:表示时间的类型如：
+#+BEGIN_EXAMPLE emacs
+DEADLINE:<2016-05-01 Sun>
+#+END_EXAMPLE
+
+** #+BEGIN_SRC..#+END_SRC
+<s tab 和 <e tab 为 #+BEGIN_SRC..#END_SRC
+和 #+BEGIN_EXAMPLE..#END_EXAMPLE 的快捷键
+
+org-mode除了可以直接插入源代码之外，可以直接求出运行结果，这也是其强大
+之处，在使用之前，需要在.emacs配置文件中设置加载的运行语言：
+#+BEGIN_SRC emacs-lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (sh . t)
+   (python . t)
+   (R . t)
+   (ruby . t)
+   (ditaa . t)
+   (dot . t)
+   (octave . t)
+   (sqlite . t)
+   (perl . t)
+   (C . t)
+   ))
+#+END_SRC
+
+之后使用 C-c C-c 对当前代码块求值
+
+以下为对Python代码求值(强其中的"\"去除)：
+#+BEGIN_SRC emacs-lisp
+\#+BEGIN_SRC python :results output
+a = 1+1
+print a
+\#+END_SRC
+
+\#+RESULTS:
+: 2
+
+#+END_SRC
+
+以下为对C代码求值(注意是includes而不是include)：
+#+BEGIN_SRC emacs-lisp
+\#+BEGIN_SRC C++ :includes <stdio.h>
+int a = 1;
+int b = 1;
+printf("a + b = %d",a+b);
+\#+END_SRC
+
+\#+RESULTS:
+: a + b = 2
+
+#+END_SRC
+
+** Output
+#+BEGIN_EXAMPLE
+设置标题和目录：
+#+TITLE: This is the title of the document
+#+OPTIONS: toc:2 (only to two levels in TOC)
+#+OPTIONS: toc:nil (no TOC at all)
+
+添加引用：
+#+BEGIN_QUOTE
+Everything should be made as simple as possible,
+but not any simpler -- Albert Einstein
+#+END_QUOTE
+
+设置居中：
+#+BEGIN_CENTER
+    Everything should be made as simple as possible,but not any simpler
+#+END_CENTER
+
+设置样例（在这里面的内容将会被直接输出，不会被转义）
+\#+BEGIN_EXAMPLE
+这里面的字符不会被转义
+\#+END_EXAMPLE
+
+注释，这些内容不会被导出
+注释的用法#  this is comment
+#+BEGIN_COMMENT
+这里的注释不会被导出
+#+END_COMMENT
+
+Latex使用，Org-Mode能支持直接输入LaTeX，在导出后LaTeX能被正确解释：
+#+END_EXAMPLE
+
+Org-Mode中使用 C-c C-e 可将文档输出为html、latex、pdf等文件
+Windows中生成中文pdf时有点问题，代替方案为安装CTeX(安装有可能覆盖系统
+中的PATH文件，注意提前备份)，通过Org-Mode产生latex文件，在文件头中添加
+如下两行：
+\usepackage{xeCJK}
+\setCJKmainfont{SimSun}
+
+再使用XeLaTex产生pdf文档
+
+** Agenda
+可用目录结构：
+| org-mode-configuration | 主要是对todo.org整个文件的一些配置。                                                                                |
+| Inbox                  | GTD中Inbox的概念，快速输入临时事件或突然的想法，释放头脑内存。                                                      |
+| Tasks                  | 相当于GTD中的Todo-list，即那些一步就能完成的零散事件，如写这篇文章。                                                |
+| Projects               | 各种需要多个步骤完成的项目，每个项目在里面是二级标题(**)，由各种三级TODO标题(***)组成。当然也可能对项目进行再细分。 |
+| Routines               | 一些每天都要进行的习惯。使用Org-mode可以很好地进行重复。                                                            |
+| Remind                 | 需要提醒的事情，比如某个时间点上课。                                                                                |
+| Reading                | 正在看的书。                                                                                                        |
+| Weekly-Review          | 每周要结束时进行Review，其中有一些代码段，用于进行当周的时间统计。                                                  |
+
+参考：
+[[http://blog.csdn.net/dc_726/article/details/8623879][用Org-mode实践《奇特的一生》]]
+
+** GTD
+参考：
+1. [[http://blog.csdn.net/dc_726/article/details/8623879][用Org-mode实践《奇特的一生》]]
+2. [[http://www.cnblogs.com/holbrook/archive/2012/04/17/2454619.html][Emacs学习笔记(11):用Org-mode实现GTD]]
+3. [[http://blog.csdn.net/jiluben/article/details/39505203][emacs之org-mode的转接（Refiling） ***]]
+
+C-c C-s 插入SCHEDULED
+C-c C-d 插入DEADLINE
+
+C-c C-t 添加/修改状态
+C-c C-q 添加标签
+
+C-c C-w 迁移标题
+
+C-c a t 查看未完成任务
+C-c a a 查看日程表
+
+** Problem like("_")
+如何设置让 Org Mode 在默认情况下，不转义 _ 字符呢？
+单个 org 文件的解决办法
+
+你可以在一个 org 文件的开头，用下面的设置来关闭这个功能。
+#+BEGIN_EXAMPLE emacs-lisp
+#+OPTIONS: ^:nil
+#+END_EXAMPLE
+如果你需要更方便的设置，可以把上面这个改为
+#+BEGIN_EXAMPLE emacs-lisp
+#+OPTIONS: ^:{}
+#+END_EXAMPLE
+这样，当你写
+a_{b}
+时，_ 后被 {} 括起来的内容就会被转义，而写 a_b 时，就按普通的方式来显示。
+org sites 的解决办法
+
+如果你是用 org sites 来写笔记，想让某个 site 的所有 org 文件不转义 _ 字符，则也可以直接在 org sites 配置文件里，配置下面这么一句，一了百了：
+(setq org-export-with-sub-superscripts nil)
+也可以在 org sites 里设置这个属性，只作用于某一个 site：
+:sub-superscript nil
+如果需要像上面一样，采用相对智能的 {} 方式，可以设置成
+:sub-superscript {}
+或是直接用 elisp 来设置全局的属性：
+(setq org-export-with-sub-superscripts '{})
+这样就会用 {} 来转义了。
+
+** Latex
+*** Head of org
+文章头可以如下设置
+#+BEGIN_EXAMPLE elisp
+#+LATEX_CLASS: org-article
+#+TITLE: 
+#+AUTHOR: Ran Bi
+#+STARTUP: overview
+#+STARTUP: hidestars
+# STARTUP: showall, overview, context, showeverything
+#+STARTUP: indent
+#+TAGS: { @Document(d) @Bug(b) @Question(q) @Report(r) @Study(s) @Task(t) @SOP(S) }
+#+OPTIONS: H:5 toc:nil
+# #+OPTIONS: \n:t ^:nil
+# #+OPTIONS: tex:dvipng
+#+OPTIONS: tex:t ^:t
+# STARTUP: latexpreview
+# Using MathJax for html preview
+
+# control org-latex output
+# :exports results => code, results, both, none
+#+BEGIN_SRC emacs-lisp :exports results :results silent
+  (require 'ox-latex)
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+  (setq org-latex-minted-options
+           '(("frame" "single")
+             ("tabsize" "2")
+             ("fontsize" "\\scriptsize")))
+  (setq org-latex-pdf-process
+        '("xelatex -8bit -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -8bit -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -8bit -shell-escape -interaction nonstopmode -output-directory %o %f"))
+#+END_SRC
+
+#+LaTeX_HEADER: \usepackage{xeCJK}
+#+LaTeX_HEADER: \setCJKmainfont{SimSun}
+#+LaTeX_HEADER: \usepackage{indentfirst}
+#+LaTeX_HEADER: \setlength{\parindent}{2em}
+#+LaTeX_HEADER: \setlength{\parskip}{0.3\baselineskip}
+
+#+Latex: \setcounter{secnumdepth}{5}
+#+Latex: \newpage
+#+TOC: Headlines 5
+#+Latex: \newpag
+#+END_EXAMPLE
+
+*** 行内公式/行间公式
+org mode内置了加快latex输入的cdlatex组件。在org mode里不建议使用$符号， 而使用\(\)和\[\]作为行内公式和行间公式标志。
+
+* Org-Mode Latex Generate
+** For org header
+
+#+BEGIN_EXAMPLE elisp
+#+LATEX_CLASS: org-article
+#+TITLE: MT8518 USB Bring Up
+#+AUTHOR: Ran Bi
+#+STARTUP: content
+#+STARTUP: hidestars
+# #+STARTUP: showstars
+# STARTUP: showall, overview, context, showeverything
+#+STARTUP: indent
+#+TAGS: { @Document(d) @Bug(b) @Question(q) @Report(r) @Study(s) @Task(t) @SOP(S) }
+#+OPTIONS: H:5 toc:nil ^:nil \n:t
+# OPTIONS: ^:nil => not translate _ as subscript, not translate ^ as superscript
+#+OPTIONS: tex:t
+# #+STARTUP: latexpreview
+
+# control org-latex output
+# :exports results => code, results, both, none
+#+BEGIN_SRC emacs-lisp :exports results :results silent
+  (require 'ox-latex)
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+  (setq org-latex-minted-options
+           '(("frame" "single")
+             ("tabsize" "2")
+             ("fontsize" "\\scriptsize")))
+  (setq org-latex-pdf-process
+        '("xelatex -8bit -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -8bit -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -8bit -shell-escape -interaction nonstopmode -output-directory %o %f"))
+#+END_SRC
+
+# Setting Page Margin
+#+LaTeX_HEADER: \usepackage{geometry}
+#+LaTeX_HEADER: \geometry{left=1.5cm,right=1.5cm,top=2.5cm,bottom=2.5cm}
+# Using Chinese Char-Set
+#+LaTeX_HEADER: \usepackage{xeCJK}
+# Chinese Font
+#+LaTeX_HEADER: \setCJKmainfont{SimSun}
+# Indent in First Line
+#+LaTeX_HEADER: \usepackage{indentfirst}
+# Indent length
+#+LaTeX_HEADER: \setlength{\parindent}{2em}
+# Line spacing
+#+LaTeX_HEADER: \setlength{\baselineskip}{15pt}
+# End spacing between paragraphs
+#+LaTeX_HEADER: \setlength{\parskip}{0.1\baselineskip}
+
+# For latex table packages
+#+LaTeX_HEADER: \usepackage[table]{xcolor}
+
+# For nicer list
+#+LaTeX_HEADER: \usepackage{paralist}
+#+LaTeX_HEADER: \let\itemize\compactitem
+#+LaTeX_HEADER: \let\description\compactdesc
+#+LaTeX_HEADER: \let\enumerate\compactenum
+
+#+BEGIN_CENTER
+Document Version: 0.1.0
+#+END_CENTER
+
+#+Latex: \setcounter{secnumdepth}{5}
+#+Latex: \newpage
+#+TOC: Headlines 5
+#+Latex: \newpage
+
+# Using smaller font-size for tables
+#+Latex: \makeatletter \def \@floatboxreset { \reset@font \scriptsize \@setminipage } \makeatother
+#+END_EXAMPLE
+
+** Tex Maker settings
+
+original quick build:
+#+BEGIN_SRC sh
+latex -interaction=nonstopmode %.tex|bibtex %.aux|latex -interaction=nonstopmode %.tex|latex -interaction=nonstopmode %.tex|xdvi %.dvi
+#+END_SRC
+
+original quick build:
+#+BEGIN_SRC sh
+xelatex -8bit -shell-escape -interaction nonstopmode %.tex | xelatex -8bit -shell-escape -interaction nonstopmode %.tex| xelatex -8bit -shell-escape -interaction nonstopmode %.tex|xdvi %.dvi
+#+END_SRC
+
+** Table related
+
+*** table size setting
+
+In the head of the document:
+#+BEGIN_SRC elisp
+# Using smaller font-size for tables
+#+Latex: \makeatletter \def \@floatboxreset { \reset@font \scriptsize \@setminipage } \makeatother
+#+END_SRC
+
+In the head of tables
+#+BEGIN_SRC elisp
+#+CAPTION: xxx(table name)
+#+END_SRC
+
+*** Colorized
+
+In the head of the document (should before \usepackage{tikz})
+#+BEGIN_SRC elisp
+#+LaTeX_HEADER: \usepackage[table]{xcolor}
+#+END_SRC
+
+In the head of tables
+#+BEGIN_SRC elisp
+#+LATEX: \definecolor{contiYellow}{RGB}{255,165,0}
+#+LATEX: \rowcolors[]{2}{contiYellow!5}{contiYellow!20}
+#+CAPTION: xxx(table name)
+#+END_SRC
+
+** Font Size
+\tiny
+\scriptsize
+\footnotesize
+\small
+\normalsize
+\large
+\Large
+\LARGE
+\huge
+\Huge
+
+** Reference
+
+1. [[https://orgmode.org/worg/org-tutorials/org-latex-export.html]]
+
+* Abbrev Mode 
+C-x a l ：将当前光标之前的单词添加为当前Mode的Abbrev 
+C-x a e ：展开Abbrev 
+C-x ' ：展开Abbrev 
+M-' ：标记Abbrev前缀 
+C-x a g ：将当前光标之前的单词添加为全局的Abbrev 
+C-x a n ：跳到Abbrev的下一个slot 
+C-x a p ：跳到Abbrev的上一个slot 
+
+* Shell Mode 
+M-p ：向前滚动历史输入记录 
+M-n ：向后滚动历史输入记录 
+C-c C-p ：光标移动到上一次输入位置 
+C-c C-n ：光标移动到下一次输入位置 
+C-c C-o ：清除上一次执行的输出 
+C-c C-r ：光标移动到上一次执行的输出开始位置 
+C-c C-u ：清空本次输入 
+C-c C-s ：保存上一次执行的输出结果 
+C-c 空格 ：换行但不执行（一次性执行多个命令） 
+C-c . ：将历史输入作为参数插入到当前位置 
+M-r ：增量搜索历史输入记录 
+C-c M-r ：根据当前输入内容在历史输入中反向搜索 
+C-c M-s ：根据当前输入内容在历史输入中正向搜索 
+C-c C-c ：中断任务（相当于shell中的Ctrl-C） 
+C-c C-d ：发送eof字符 
+
+* Other Emacs Tips
+** Char Set
+C-u C-x = 查看文字所使用的字符集
+
+** Short key binding
+当在buffer里按下Tab键时是什么情况？插入一个tab字符？indent？如果是indent又是如何indent的呢？想要更改indent的宽度该怎么办呢？下面以XHTML这个Major Mode为例，看看emacs是怎样处理的。
+
+C-z C-h查看C-z对应的快捷键
+C-x C-h查看C-x对应的快捷键
+C-c C-h查看C-c对应的快捷键
+
+用C-h c查看Tab键绑定到了indent-for-tab-command命令上
+用C-h f查看indent-for-tab-command函数的描述，发现其依赖一个变量tab-always-indent来动作
+用C-h v查看tab-always-indent变量的描述：如果其值为t，indent当前行；如果其值为nil，当光标在left margin(当前行的indentation里)时，indent当前行，否则插入一个tab字符。当前值为t。
+怎样indent当前行？由变量indent-line-function决定，其值是实现indent的函数，用C-h v查看其值为sgml-indent-line
+不想去看sgml-indent-line是怎么indent的，因为有些indent的算法是比较复杂的，只要知道那些变量可以控制indent的效果就可以了
+用C-h m查看当前Mode的描述：XHTML Mode基于SGML mode，用C-h v html-SPC和C-h v sgml-SPC来查看可用变量
+发现sgml-basic-offset控制着indent的宽度，不过当前值为2，正合我意，否则之间就可以在该变量描述的那个buffer里用customize对该值进行修改
+
+** byte compile
+(byte-compile-file "foo.el")
+
+;; compile all the files .elc files which has a corresponding newer .el file 
+(byte-recompile-directory ".")
+
+;; like before, but in this case force the byte-compilation of an .el file when the corresponding
+;; .elc file doesn't exist
+
+(byte-recompile-directory "." 0)
+
+** cua mode (shortkey: <F9>, in my setting)
+cua-mode支持的可视化块模式
+
+除了emacs本身支持的列模式外，emacs还可以通过cua-mode支持一种可视化的列模式。在cua-mode下，按[C-return]会进入cua rectangle模式。在这个模式下可以通过鼠标点击确认起点，然后通过光标键来选中一个rect范围，这个rect会用另外的颜色显示出来。
+
+cua-mode下可以用以下命令进行列操作：
+直接输入字符: 在每行前(或后)都插入这个字符
+[M-a]: 将rect中的文字左对齐
+[M-b]: 用空格(tabs或者spaces)替换所有rect中的字符
+[M-c]: 去掉所有行左侧的空格
+[M-f]: 用单个字符替换所有rect中的字符(提示输入一个字符)
+[M-i]: 对每行中第一个找到的数字进行加1操作(自动把0x开头的当作十六进制数字)
+[M-k]: 剪切rect
+[M-l]: 把rect中的内容全部转换为小写
+[M-m]: 拷贝rect
+[M-n]: 用一串自增的数字替换rect中的每一行(这个功能可以用来给每行编号)
+[M-o]: rect的内容右移，选中的rect用空格填充
+[M-r]: 用字符串替换符满足正则表达式的字符串
+[M-R]: 上下反转
+[M-s]: 把rect中的每一行替换为一个字符串(提示输入)
+[M-t]: 把rect整个替换为一个字符串(提示输入)
+[M-u]: 把rect中的内容全部转换为大写
+[M-|]: 对rect执行一个shell命令
+
+** Matching tags and properties
+reference: [[http://orgmode.org/manual/Matching-tags-and-properties.html]]
+
+If headlines in the agenda files are marked with tags (see Tags), or have properties (see Properties and columns), you can select headlines based on this metadata and collect them into an agenda buffer. The match syntax described here also applies when creating sparse trees with C-c / m.
+
+C-c a m     (org-tags-view)
+Produce a list of all headlines that match a given set of tags. The command prompts for a selection criterion, which is a boolean logic expression with tags, like ‘+work+urgent-withboss’ or ‘work|home’ (see Tags). If you often need a specific search, define a custom command for it (see Agenda dispatcher). 
+C-c a M     (org-tags-view)
+Like C-c a m, but only select headlines that are also TODO items in a not-DONE state and force checking subitems (see variable org-tags-match-list-sublevels). To exclude scheduled/deadline items, see the variable org-agenda-tags-todo-honor-ignore-options. Matching specific TODO keywords together with a tags match is also possible, see Tag searches.
+The commands available in the tags list are described in Agenda commands.
+
+Match syntax
+
+A search string can use Boolean operators ‘&’ for AND and ‘|’ for OR. ‘&’ binds more strongly than ‘|’. Parentheses are not implemented. Each element in the search is either a tag, a regular expression matching tags, or an expression like PROPERTY OPERATOR VALUE with a comparison operator, accessing a property value. Each element may be preceded by ‘-’, to select against it, and ‘+’ is syntactic sugar for positive selection. The AND operator ‘&’ is optional when ‘+’ or ‘-’ is present. Here are some examples, using only tags.
+
+‘work’
+Select headlines tagged ‘:work:’. 
+‘work&boss’
+Select headlines tagged ‘:work:’ and ‘:boss:’. 
+‘+work-boss’
+Select headlines tagged ‘:work:’, but discard those also tagged ‘:boss:’. 
+‘work|laptop’
+Selects lines tagged ‘:work:’ or ‘:laptop:’. 
+‘work|laptop+night’
+Like before, but require the ‘:laptop:’ lines to be tagged also ‘:night:’.
+Instead of a tag, you may also specify a regular expression enclosed in curly braces. For example, ‘work+{^boss.*}’ matches headlines that contain the tag ‘:work:’ and any tag starting with ‘boss’.
+
+Group tags (see Tag hierarchy) are expanded as regular expressions. E.g., if ‘:work:’ is a group tag for the group ‘:work:lab:conf:’, then searching for ‘work’ will search for ‘{\(?:work\|lab\|conf\)}’ and searching for ‘-work’ will search for all headlines but those with one of the tags in the group (i.e., ‘-{\(?:work\|lab\|conf\)}’).
+
+You may also test for properties (see Properties and columns) at the same time as matching tags. The properties may be real properties, or special properties that represent other metadata (see Special properties). For example, the “property” TODO represents the TODO keyword of the entry and the “property” PRIORITY represents the PRIORITY keyword of the entry.
+
+In addition to the properties mentioned above, LEVEL represents the level of an entry. So a search ‘+LEVEL=3+boss-TODO="DONE"’ lists all level three headlines that have the tag ‘boss’ and are not marked with the TODO keyword DONE. In buffers with org-odd-levels-only set, ‘LEVEL’ does not count the number of stars, but ‘LEVEL=2’ will correspond to 3 stars etc.
+
+Here are more examples:
+
+‘work+TODO="WAITING"’
+Select ‘:work:’-tagged TODO lines with the specific TODO keyword ‘WAITING’. 
+‘work+TODO="WAITING"|home+TODO="WAITING"’
+Waiting tasks both at work and at home.
+When matching properties, a number of different operators can be used to test the value of a property. Here is a complex example:
+
+     +work-boss+PRIORITY="A"+Coffee="unlimited"+Effort<2         \
+              +With={Sarah\|Denny}+SCHEDULED>="<2008-10-11>"
+The type of comparison will depend on how the comparison value is written:
+
+If the comparison value is a plain number, a numerical comparison is done, and the allowed operators are ‘<’, ‘=’, ‘>’, ‘<=’, ‘>=’, and ‘<>’.
+If the comparison value is enclosed in double-quotes, a string comparison is done, and the same operators are allowed.
+If the comparison value is enclosed in double-quotes and angular brackets (like ‘DEADLINE<="<2008-12-24 18:30>"’), both values are assumed to be date/time specifications in the standard Org way, and the comparison will be done accordingly. Special values that will be recognized are "<now>" for now (including time), and "<today>", and "<tomorrow>" for these days at 00:00 hours, i.e., without a time specification. Also strings like "<+5d>" or "<-2m>" with units d, w, m, and y for day, week, month, and year, respectively, can be used.
+If the comparison value is enclosed in curly braces, a regexp match is performed, with ‘=’ meaning that the regexp matches the property value, and ‘<>’ meaning that it does not match.
+So the search string in the example finds entries tagged ‘:work:’ but not ‘:boss:’, which also have a priority value ‘A’, a ‘:Coffee:’ property with the value ‘unlimited’, an ‘Effort’ property that is numerically smaller than 2, a ‘:With:’ property that is matched by the regular expression ‘Sarah\|Denny’, and that are scheduled on or after October 11, 2008.
+
+You can configure Org mode to use property inheritance during a search, but beware that this can slow down searches considerably. See Property inheritance, for details.
+
+For backward compatibility, and also for typing speed, there is also a different way to test TODO states in a search. For this, terminate the tags/property part of the search string (which may include several terms connected with ‘|’) with a ‘/’ and then specify a Boolean expression just for TODO keywords. The syntax is then similar to that for tags, but should be applied with care: for example, a positive selection on several TODO keywords cannot meaningfully be combined with boolean AND. However, negative selection combined with AND can be meaningful. To make sure that only lines are checked that actually have any TODO keyword (resulting in a speed-up), use C-c a M, or equivalently start the TODO part after the slash with ‘!’. Using C-c a M or ‘/!’ will not match TODO keywords in a DONE state. Examples:
+
+‘work/WAITING’
+Same as ‘work+TODO="WAITING"’ 
+‘work/!-WAITING-NEXT’
+Select ‘:work:’-tagged TODO lines that are neither ‘WAITING’ nor ‘NEXT’ 
+‘work/!+WAITING|+NEXT’
+Select ‘:work:’-tagged TODO lines that are either ‘WAITING’ or ‘NEXT’.
