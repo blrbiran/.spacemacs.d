@@ -62,10 +62,19 @@ Each entry is either:
 
 (defun bb/init-bb-mode ()
   (use-package bb-mode
+    :commands (bb-insert-CR-string
+               bb-insert-defined-CR-string
+               bb-what-hexadecimal-value
+               bb-open-key-info-file)
     :init
-    (spacemacs/declare-prefix "mb" "bb-mode")
-    (spacemacs/set-leader-keys "mbc" 'bi-insert-CR-word)
-    (spacemacs/set-leader-keys "mbw" 'bi-insert-defined-CR-word))
+    (spacemacs/declare-prefix "m m" "bb-mode")
+    (spacemacs/set-leader-keys
+      "m m c" 'bb-insert-CR-string
+      "m m w" 'bb-insert-defined-CR-string
+      "m m b" 'bb-what-hexadecimal-value
+      "m m d" 'bb-open-key-info-file
+      "m m <f12>" 'whitespace-mode)
+    )
   )
 
 ;;; packages.el ends here
