@@ -30,35 +30,8 @@ values."
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
-     ;; <M-m f e R> (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     ivy
-     auto-completion
-     better-defaults
-     emacs-lisp
-     git
-     markdown
-     org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     python
-     c-c++
-     java
-     go
-     sql
-     yaml
-     javascript
-     graphviz
-     ;; spell-checking
-     syntax-checking
-     ;; version-control
-     bb
-     )
+   '((config   :location local)
+     (personal :location local))
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -68,10 +41,7 @@ values."
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages
-   '(
-     js-doc
-     livid-mode
-     )
+   '(js-doc livid-mode git-gutter-fringe+)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -114,7 +84,7 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -326,8 +296,6 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (setq-default evil-escape-key-sequence "jk")
-  (setq-default evil-escape-delay 0.2)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -339,7 +307,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (git-gutter-fringe+ git-gutter-fringe unfill mwim ghub treepy graphql fringe-helper git-gutter+ git-gutter diff-hl org-projectile org-pomodoro alert log4e magit-gitflow json-mode js2-refactor flycheck-pos-tip livid-mode evil-magit yapfify yaml-mode web-beautify sql-indent smeargle skewer-mode pyvenv pytest pyenv-mode py-isort pip-requirements orgit org-category-capture org-present gntp org-mime org-download mmm-mode markdown-toc markdown-mode magit-popup magit simple-httpd live-py-mode json-snatcher json-reformat multiple-cursors js2-mode js-doc hy-mode htmlize go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-ivy flyspell-correct pos-tip flycheck transient git-commit with-editor disaster cython-mode company-tern dash-functional tern company-statistics company-go go-mode company-emacs-eclim eclim company-c-headers company-anaconda company coffee-mode cmake-mode clang-format auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired counsel-projectile projectile auto-compile pkg-info packed evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word counsel column-enforce-mode clean-aindent-mode bracketed-paste bind-key auto-highlight-symbol async aggressive-indent adaptive-wrap ace-window ace-link))))
+    (xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help git-gutter-fringe+ git-gutter-fringe unfill mwim ghub treepy graphql fringe-helper git-gutter+ git-gutter diff-hl org-projectile org-pomodoro alert log4e magit-gitflow json-mode js2-refactor flycheck-pos-tip livid-mode evil-magit yapfify yaml-mode web-beautify sql-indent smeargle skewer-mode pyvenv pytest pyenv-mode py-isort pip-requirements orgit org-category-capture org-present gntp org-mime org-download mmm-mode markdown-toc markdown-mode magit-popup magit simple-httpd live-py-mode json-snatcher json-reformat multiple-cursors js2-mode js-doc hy-mode htmlize go-guru go-eldoc gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-ivy flyspell-correct pos-tip flycheck transient git-commit with-editor disaster cython-mode company-tern dash-functional tern company-statistics company-go go-mode company-emacs-eclim eclim company-c-headers company-anaconda company coffee-mode cmake-mode clang-format auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired counsel-projectile projectile auto-compile pkg-info packed evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word counsel column-enforce-mode clean-aindent-mode bracketed-paste bind-key auto-highlight-symbol async aggressive-indent adaptive-wrap ace-window ace-link))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
